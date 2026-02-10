@@ -144,7 +144,7 @@ export default async function MoviePage({ params }) {
                 
                 {/* Overview */}
                 <div>
-                  <h2 className="text-2xl font-semibold mb-3">Overview</h2>
+                  <h2 className="text-2xl font-semibold mb-3 text-gray-700">Overview</h2>
                   <p className="text-gray-700 leading-relaxed">
                     {movie.overview || 'No overview available.'}
                   </p>
@@ -154,57 +154,64 @@ export default async function MoviePage({ params }) {
           </div>
           
           {/* Cast Section */}
-          {topCast.length > 0 && (
-            <div className="mt-8 bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold mb-6">Top Cast</h2>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                {topCast.map((actor) => (
-                  <div key={actor.id} className="text-center">
-                    {actor.profile_path ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
-                        alt={actor.name}
-                        className="w-full rounded-lg shadow-md mb-2"
-                      />
-                    ) : (
-                      <div className="w-full aspect-[2/3] bg-gray-200 rounded-lg mb-2 flex items-center justify-center">
-                        <span className="text-gray-400 text-xs">No photo</span>
-                      </div>
-                    )}
-                    <p className="font-semibold text-sm">{actor.name}</p>
-                    <p className="text-xs text-gray-600">{actor.character}</p>
-                  </div>
-                ))}
-              </div>
+          {/* Cast Section */}
+{topCast.length > 0 && (
+  <div className="mt-8 bg-white rounded-lg shadow-lg p-8">
+    <h2 className="text-3xl font-bold mb-6 text-gray-700">Top Cast</h2>
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+      {topCast.map((actor) => (
+        <a 
+          key={actor.id}
+          href={`/person/${actor.id}`}
+          className="text-center group block"
+        >
+          {actor.profile_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+              alt={actor.name}
+              className=" w-full rounded-lg shadow-md mb-2 group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
+            />
+          ) : (
+            <div className=" w-full aspect-[2/3] bg-gray-200 rounded-lg mb-2 flex items-center justify-center">
+              <span className="text-gray-400 text-xs">No photo</span>
             </div>
           )}
+          <p className="font-semibold text-sm group-hover:text-blue-600 transition-colors">
+            {actor.name}
+          </p>
+          <p className="text-xs text-gray-600">{actor.character}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+)}
           
           {/* Additional Info */}
           <div className="mt-8 bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold mb-6">Movie Details</h2>
+            <h2 className="text-3xl font-bold mb-6 text-gray-700">Movie Details</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {movie.budget > 0 && (
-                <div>
-                  <span className="font-semibold">Budget:</span>{' '}
+                <div className='text-gray-700'>
+                  <span className="font-semibold text-gray-700">Budget:</span>{' '}
                   ${movie.budget.toLocaleString()}
                 </div>
               )}
               
               {movie.revenue > 0 && (
-                <div>
+                <div className='text-gray-700'>
                   <span className="font-semibold">Revenue:</span>{' '}
                   ${movie.revenue.toLocaleString()}
                 </div>
               )}
               
               {movie.status && (
-                <div>
+                <div className='text-gray-700'>
                   <span className="font-semibold">Status:</span> {movie.status}
                 </div>
               )}
               
               {movie.original_language && (
-                <div>
+                <div className='text-gray-700'>
                   <span className="font-semibold">Original Language:</span>{' '}
                   {movie.original_language.toUpperCase()}
                 </div>

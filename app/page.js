@@ -1,9 +1,13 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "MovieSEO - Discover Popular Movies, Reviews & Cast Information",
-  description:
-    "Browse the most popular movies, read reviews, explore cast details, and find where to watch.",
+  title: 'RaftMovies - Discover Popular Movies, Reviews & Cast Information',
+  description: 'Browse the most popular movies, read reviews, explore cast details, and find where to watch. Your ultimate movie database with ratings, trailers, and more.',
+  openGraph: {
+    title: 'RaftMovies - Popular Movies Database',
+    description: 'Discover trending movies, ratings, cast, and reviews',
+    type: 'website',
+  },
 };
 
 async function getPopularMovies() {
@@ -24,6 +28,14 @@ async function getPopularMovies() {
 
 export default async function HomePage() {
   const movies = await getPopularMovies();
+
+    const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MovieSEO',  // Change to 'RaftMovies'
+    url: 'https://your-domain.com',  // Change to 'https://raftlabs-one.vercel.app'
+    description: 'Discover popular movies, reviews, and cast information',
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -103,7 +115,7 @@ export default async function HomePage() {
 
           <div className="text-gray-700 space-y-4">
             <p>
-              Welcome to MovieSEO, your comprehensive source for discovering
+              Welcome to RaftMovies, your comprehensive source for discovering
               the latest and most popular movies. We provide detailed
               information about films, including cast members, crew details,
               user ratings, and professional reviews.

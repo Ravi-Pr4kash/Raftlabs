@@ -152,16 +152,25 @@ export default async function PersonPage({ params }) {
                 </div>
                 
                 {/* Biography */}
-                {person.biography && (
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-3">Biography</h2>
-                    <p className="text-gray-700 leading-relaxed">
-                      {person.biography.length > 500
-                        ? person.biography.substring(0, 500) + '...'
-                        : person.biography}
-                    </p>
-                  </div>
-                )}
+  {person.biography && (
+  <div className="space-y-4">
+    <div className="flex items-center gap-3">
+      <span className="h-6 w-1 rounded-full bg-indigo-600" />
+      <h2 className="text-2xl font-semibold text-gray-700">
+        Biography
+      </h2>
+    </div>
+
+    <p className="leading-relaxed text-slate-700">
+      {person.biography.length > 500
+        ? person.biography.substring(0, 500) + "..."
+        : person.biography}
+    </p>
+  </div>
+)}
+
+
+
               </div>
             </div>
           </div>
@@ -169,7 +178,7 @@ export default async function PersonPage({ params }) {
           {/* Filmography */}
           {topMovies.length > 0 && (
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold mb-6">Known For</h2>
+              <h2 className="text-3xl font-bold mb-6 text-gray-700">Known For</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
                 {topMovies.map((movie) => (
                   <div key={movie.id} className="group">
