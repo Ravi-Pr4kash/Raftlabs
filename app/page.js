@@ -1,65 +1,122 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export const metadata = {
+  title: "MovieSEO - Discover Popular Movies, Reviews & Cast Information",
+  description:
+    "Browse the most popular movies, read reviews, explore cast details, and find where to watch.",
+};
+
+async function getPopularMovies() {
+  const API_KEY = process.env.TMDB_API_KEY;
+
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=1`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch movies");
+  }
+
+  const data = await res.json();
+  return data.results || [];
+}
+
+export default async function HomePage() {
+  const movies = await getPopularMovies();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      {/* HERO */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h1 className="text-5xl font-bold mb-4">Discover Popular Movies</h1>
+          <p className="text-xl text-blue-100">
+            Explore trending films, read reviews, and find your next favorite
+            movie
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      {/* MOVIE GRID */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          Trending Now
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {movies.map((movie) => {
+            const movieUrl = `/movie/${movie.id}`;
+            const posterUrl =
+              "https://image.tmdb.org/t/p/w342" + movie.poster_path;
+
+            return (
+              <Link
+                key={movie.id}
+                href={movieUrl}
+                className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                {movie.poster_path ? (
+                  <img
+                    src={posterUrl}
+                    alt={`${movie.title} poster`}
+                    className="w-full h-auto object-cover"
+                  />
+                ) : (
+                  <div className="w-full aspect-[2/3] bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">No poster</span>
+                  </div>
+                )}
+
+                <div className="p-4">
+                  <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                    {movie.title}
+                  </h3>
+
+                  <div className="flex items-center justify-between text-sm text-gray-600">
+                    <div className="flex items-center">
+                      <span className="text-yellow-500 mr-1">★</span>
+                      <span className="font-semibold">
+                        {movie.vote_average.toFixed(1)}
+                      </span>
+                    </div>
+
+                    {movie.release_date && (
+                      <span>
+                        {new Date(movie.release_date).getFullYear()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </main>
+      </div>
+
+      {/* SEO CONTENT */}
+      <div className="bg-gray-50 py-12 mt-12">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            Your Ultimate Movie Database
+          </h2>
+
+          <div className="text-gray-700 space-y-4">
+            <p>
+              Welcome to MovieSEO, your comprehensive source for discovering
+              the latest and most popular movies. We provide detailed
+              information about films, including cast members, crew details,
+              user ratings, and professional reviews.
+            </p>
+
+            <p>
+              Our database features thousands of movies across all genres —
+              from action-packed blockbusters to indie darlings and classic
+              cinema.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

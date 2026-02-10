@@ -1,36 +1,183 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MovieSEO - Next.js Movie Database with SEO Optimization
 
-## Getting Started
+A server-side rendered (SSR) movie database built with Next.js, featuring programmatic SEO pages optimized for search engines.
 
-First, run the development server:
+## 🎯 Project Overview
 
+MovieSEO is a comprehensive movie information platform that leverages Next.js for server-side rendering and implements SEO best practices including JSON-LD schema markup, OpenGraph tags, and optimized meta descriptions.
+
+## 🚀 Features
+
+- **Server-Side Rendering (SSR)** - All pages are rendered on the server for optimal SEO
+- **Programmatic SEO Pages** - Dynamic pages generated from TMDB API data
+- **JSON-LD Schema Markup** - Structured data for movies, actors, and website
+- **OpenGraph & Twitter Cards** - Social media optimization
+- **Responsive Design** - Mobile-first, fully responsive UI
+- **SEO-Optimized URLs** - Clean, descriptive URLs for all pages
+
+## 📊 Page Types
+
+1. **Homepage** - Popular movies listing with trending content
+2. **Movie Detail Pages** - Individual movie information with cast, ratings, and reviews
+3. **Actor Profile Pages** - Actor biographies with filmography
+
+## 🔍 SEO Implementation
+
+### Keyword Research
+Target keywords identified through Google Keyword Planner:
+- `[movie-title] review` - High search volume
+- `[movie-title] cast` - High search volume
+- `[actor-name] movies` - Medium search volume
+- `watch [movie-title]` - High intent
+
+### SEO Features
+- ✅ Dynamic meta titles and descriptions
+- ✅ JSON-LD structured data (Movie, Person, WebSite schemas)
+- ✅ OpenGraph metadata for social sharing
+- ✅ Twitter Card optimization
+- ✅ Semantic HTML structure
+- ✅ Image alt tags
+- ✅ Proper heading hierarchy (H1, H2, H3)
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** JavaScript
+- **Styling:** Tailwind CSS
+- **Data Source:** The Movie Database (TMDB) API
+- **SEO:** next-seo, schema-dts
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd seo-nextjs-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Create `.env.local` file in the root directory:
+```
+NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Get your TMDB API key:
+   - Sign up at https://www.themoviedb.org/
+   - Go to Settings → API
+   - Request API key (choose Developer)
+   - Copy the API Key (v3 auth)
 
-## Learn More
+5. Run the development server:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. Open http://localhost:3000 in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deploy to Vercel
 
-## Deploy on Vercel
+1. Push your code to GitHub
+2. Go to https://vercel.com
+3. Click "New Project"
+4. Import your GitHub repository
+5. Add environment variable:
+   - Key: `NEXT_PUBLIC_TMDB_API_KEY`
+   - Value: Your TMDB API key
+6. Click "Deploy"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Your site will be live in minutes!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+```
+seo-nextjs-project/
+├── app/
+│   ├── movie/[id]/
+│   │   └── page.js          # Movie detail pages
+│   ├── person/[id]/
+│   │   └── page.js          # Actor profile pages
+│   ├── layout.js            # Root layout with navigation
+│   ├── page.js              # Homepage
+│   └── globals.css          # Global styles
+├── lib/
+│   └── seo.js               # SEO utility functions
+├── pages/
+│   └── api/
+│       └── test-tmdb.js     # API test endpoint
+├── KEYWORDS.md              # Keyword research documentation
+├── .env.local               # Environment variables (not in git)
+└── README.md
+```
+
+## 🎨 Key Components
+
+### SEO Utilities (`lib/seo.js`)
+- `generateMovieTitle()` - Creates SEO-friendly movie titles
+- `generateMovieDescription()` - Generates meta descriptions
+- `generateMovieSchema()` - Creates JSON-LD schema for movies
+- `generateActorTitle()` - Creates SEO-friendly actor titles
+- `generateActorDescription()` - Generates actor meta descriptions
+
+### Dynamic Pages
+- `/movie/[id]` - Movie details with SSR
+- `/person/[id]` - Actor profiles with SSR
+- `/` - Homepage with popular movies
+
+## 📈 SEO Performance
+
+Lighthouse scores (as of testing):
+- SEO: XX/100
+- Performance: XX/100
+- Best Practices: XX/100
+- Accessibility: XX/100
+
+## 🔑 Key SEO Elements
+
+### Movie Pages
+```javascript
+- Title: "[Movie Title] - Cast, Reviews & Where to Watch | MovieSEO"
+- Meta Description: Dynamic based on movie data
+- JSON-LD: Movie schema with ratings, cast, release date
+- OpenGraph: Title, description, poster image
+```
+
+### Actor Pages
+```javascript
+- Title: "[Actor Name] - Movies, Biography & Filmography | MovieSEO"
+- Meta Description: Dynamic based on actor's known films
+- JSON-LD: Person schema with biography, filmography
+- OpenGraph: Title, description, profile image
+```
+
+## 🚦 Future Enhancements
+
+- [ ] Add genre-based pages
+- [ ] Implement search functionality
+- [ ] Add pagination for movie listings
+- [ ] Create sitemap.xml
+- [ ] Add robots.txt
+- [ ] Implement breadcrumb navigation
+- [ ] Add user reviews/ratings
+
+## 📝 License
+
+This project is for educational purposes.
+
+## 🙏 Acknowledgments
+
+- Movie data provided by [The Movie Database (TMDB)](https://www.themoviedb.org/)
+- Built with [Next.js](https://nextjs.org/)
+```
+
+### 7C. Update .gitignore
+
+Make sure your `.gitignore` includes:
+```
+.env.local
+node_modules/
+.next/
