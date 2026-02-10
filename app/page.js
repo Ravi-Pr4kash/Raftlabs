@@ -122,8 +122,8 @@ export default async function HomePage() {
             </p>
 
             <p>
-              Our database features thousands of movies across all genres —
-              from action-packed blockbusters to indie darlings and classic
+              Our database features thousands of movies across all genres 
+              from action packed blockbusters to indie darlings and classic
               cinema.
             </p>
           </div>

@@ -6,7 +6,7 @@ async function getMovieData(id) {
   
   const movieRes = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`,
-    { cache: 'no-store' } // Ensures fresh data on each request
+    { cache: 'no-store' } // fresh data on each request
   );
   
   const creditsRes = await fetch(
@@ -20,9 +20,9 @@ async function getMovieData(id) {
   return { movie, credits };
 }
 
-// Generate metadata for SEO (runs on server)
+// Generate metadata for SEO 
 export async function generateMetadata({ params }) {
-  const { id } = await params; // FIX: Added await here
+  const { id } = await params; 
   const { movie } = await getMovieData(id);
   
   const title = generateMovieTitle(movie.title);
@@ -49,15 +49,15 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Main page component
+// main page
 export default async function MoviePage({ params }) {
-  const { id } = await params; // FIX: Added await here
+  const { id } = await params; 
   const { movie, credits } = await getMovieData(id);
   
   // Generate JSON-LD schema
   const movieSchema = generateMovieSchema(movie);
   
-  // Get top 5 cast members
+  // Getting top 5 cast members
   const topCast = credits.cast?.slice(0, 5) || [];
   
   return (

@@ -15,13 +15,13 @@ MovieSEO is a comprehensive movie information platform that leverages Next.js fo
 - **Responsive Design** - Mobile-first, fully responsive UI
 - **SEO-Optimized URLs** - Clean, descriptive URLs for all pages
 
-## 📊 Page Types
+## Page Types
 
 1. **Homepage** - Popular movies listing with trending content
 2. **Movie Detail Pages** - Individual movie information with cast, ratings, and reviews
 3. **Actor Profile Pages** - Actor biographies with filmography
 
-## 🔍 SEO Implementation
+## SEO Implementation
 
 ### Keyword Research
 Target keywords identified through Google Keyword Planner:
@@ -31,13 +31,13 @@ Target keywords identified through Google Keyword Planner:
 - `watch [movie-title]` - High intent
 
 ### SEO Features
-- ✅ Dynamic meta titles and descriptions
-- ✅ JSON-LD structured data (Movie, Person, WebSite schemas)
-- ✅ OpenGraph metadata for social sharing
-- ✅ Twitter Card optimization
-- ✅ Semantic HTML structure
-- ✅ Image alt tags
-- ✅ Proper heading hierarchy (H1, H2, H3)
+-  Dynamic meta titles and descriptions
+-  JSON-LD structured data (Movie, Person, WebSite schemas)
+-  OpenGraph metadata for social sharing
+-  Twitter Card optimization
+-  Semantic HTML structure
+-  Image alt tags
+-  Proper heading hierarchy (H1, H2, H3)
 
 ## 🛠️ Tech Stack
 
@@ -47,11 +47,11 @@ Target keywords identified through Google Keyword Planner:
 - **Data Source:** The Movie Database (TMDB) API
 - **SEO:** next-seo, schema-dts
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Ravi-Pr4kash/Raftlabs
 cd seo-nextjs-project
 ```
 
@@ -62,7 +62,7 @@ npm install
 
 3. Create `.env.local` file in the root directory:
 ```
-NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
+TMDB_API_KEY=your_api_key_here
 ```
 
 4. Get your TMDB API key:
@@ -78,7 +78,7 @@ npm run dev
 
 6. Open http://localhost:3000 in your browser
 
-## 🌐 Deployment
+## Deployment
 
 ### Deploy to Vercel
 
@@ -87,13 +87,13 @@ npm run dev
 3. Click "New Project"
 4. Import your GitHub repository
 5. Add environment variable:
-   - Key: `NEXT_PUBLIC_TMDB_API_KEY`
+   - Key: `TMDB_API_KEY`
    - Value: Your TMDB API key
 6. Click "Deploy"
 
 Your site will be live in minutes!
 
-## 📁 Project Structure
+## Project Structure
 ```
 seo-nextjs-project/
 ├── app/
@@ -114,7 +114,7 @@ seo-nextjs-project/
 └── README.md
 ```
 
-## 🎨 Key Components
+## Key Components
 
 ### SEO Utilities (`lib/seo.js`)
 - `generateMovieTitle()` - Creates SEO-friendly movie titles
@@ -136,7 +136,7 @@ Lighthouse scores (as of testing):
 - Best Practices: XX/100
 - Accessibility: XX/100
 
-## 🔑 Key SEO Elements
+## Key SEO Elements
 
 ### Movie Pages
 ```javascript
@@ -154,30 +154,10 @@ Lighthouse scores (as of testing):
 - OpenGraph: Title, description, profile image
 ```
 
-## 🚦 Future Enhancements
 
-- [ ] Add genre-based pages
-- [ ] Implement search functionality
-- [ ] Add pagination for movie listings
-- [ ] Create sitemap.xml
-- [ ] Add robots.txt
-- [ ] Implement breadcrumb navigation
-- [ ] Add user reviews/ratings
 
-## 📝 License
-
-This project is for educational purposes.
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Movie data provided by [The Movie Database (TMDB)](https://www.themoviedb.org/)
 - Built with [Next.js](https://nextjs.org/)
 ```
-
-### 7C. Update .gitignore
-
-Make sure your `.gitignore` includes:
-```
-.env.local
-node_modules/
-.next/
